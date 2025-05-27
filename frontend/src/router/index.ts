@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import LandingPage from '../views/LandingPage.vue'
 import LoginView from '../views/auth/LoginView.vue'
-// import RegisterView from '../views/auth/RegisterView.vue' // Commented out because file is missing
+import RegisterView from '../views/auth/RegisterView.vue'
 import DashboardView from '../views/dashboard/DashboardView.vue'
 import ProductsView from '../views/products/ProductsView.vue'
 import ProductCreateView from '../views/products/ProductCreateView.vue'
@@ -34,12 +34,12 @@ const router = createRouter({
       component: LoginView,
       meta: { requiresAuth: false }
     },
-    // {
-    //   path: '/register',
-    //   name: 'register',
-    //   component: RegisterView,
-    //   meta: { requiresAuth: false }
-    // },
+    {
+      path: '/register',
+      name: 'register',
+      component: RegisterView,
+      meta: { requiresAuth: false }
+    },
     {
       path: '/products',
       name: 'products',
