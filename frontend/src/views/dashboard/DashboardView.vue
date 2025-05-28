@@ -9,31 +9,12 @@
 
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-      <StatCard
-        title="Today's Sales"
-        :value="formatCurrency(todayStats.sales)"
-        icon="currency-dollar"
-        color="primary"
-      />
-      <StatCard
-        title="Products Sold"
-        :value="todayStats.productsSold.toString()"
-        icon="shopping-bag"
-        color="success"
-      />
-      <StatCard
-        title="Low Stock Items"
-        :value="lowStockCount.toString()"
-        icon="exclamation"
-        color="warning"
-        :to="'/products?lowStock=true'"
-      />
-      <StatCard
-        title="Total Inventory"
-        :value="totalProducts.toString()"
-        icon="collection"
-        color="info"
-      />
+      <StatCard title="Today's Sales" :value="formatCurrency(todayStats.sales)" icon="currency-dollar"
+        color="primary" />
+      <StatCard title="Products Sold" :value="todayStats.productsSold.toString()" icon="shopping-bag" color="success" />
+      <StatCard title="Low Stock Items" :value="lowStockCount.toString()" icon="exclamation" color="warning"
+        :to="'/products?lowStock=true'" />
+      <StatCard title="Total Inventory" :value="totalProducts.toString()" icon="collection" color="info" />
     </div>
 
     <div class="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-2">
@@ -42,17 +23,12 @@
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-lg font-medium text-gray-900">Sales Overview</h2>
           <div class="flex space-x-2">
-            <button
-              v-for="period in ['7D', '30D', '90D']"
-              :key="period"
-              :class="[
-                selectedPeriod === period
-                  ? 'bg-primary-100 text-primary-800'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
-                'px-3 py-1 rounded-md text-sm font-medium'
-              ]"
-              @click="selectedPeriod = period"
-            >
+            <button v-for="period in ['7D', '30D', '90D']" :key="period" :class="[
+              selectedPeriod === period
+                ? 'bg-primary-100 text-primary-800'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
+              'px-3 py-1 rounded-md text-sm font-medium'
+            ]" @click="selectedPeriod = period">
               {{ period }}
             </button>
           </div>
@@ -66,12 +42,10 @@
       <div class="bg-white rounded-lg shadow p-6">
         <h2 class="text-lg font-medium text-gray-900 mb-4">Top Selling Products</h2>
         <div class="space-y-4">
-          <div
-            v-for="(product, index) in topProducts"
-            :key="index"
-            class="flex items-center p-2 rounded-lg hover:bg-gray-50"
-          >
-            <div class="flex-shrink-0 h-10 w-10 rounded-md bg-primary-100 flex items-center justify-center text-primary-600">
+          <div v-for="(product, index) in topProducts" :key="index"
+            class="flex items-center p-2 rounded-lg hover:bg-gray-50">
+            <div
+              class="flex-shrink-0 h-10 w-10 rounded-md bg-primary-100 flex items-center justify-center text-primary-600">
               {{ index + 1 }}
             </div>
             <div class="ml-4 flex-1">
@@ -81,10 +55,8 @@
               </div>
               <div class="mt-1 flex items-center">
                 <div class="flex-1 h-2 bg-gray-200 rounded-full">
-                  <div
-                    class="h-2 bg-primary-500 rounded-full"
-                    :style="{ width: `${(product.sold / topProducts[0].sold) * 100}%` }"
-                  ></div>
+                  <div class="h-2 bg-primary-500 rounded-full"
+                    :style="{ width: `${(product.sold / topProducts[0].sold) * 100}%` }"></div>
                 </div>
                 <span class="ml-3 text-xs text-gray-500">{{ formatCurrency(product.revenue) }}</span>
               </div>
@@ -102,20 +74,20 @@
       <div class="p-6">
         <div v-if="lowStockProducts.length === 0" class="text-center py-8">
           <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <p class="mt-2 text-gray-500">No low stock alerts at the moment.</p>
         </div>
         <div v-else class="space-y-4">
-          <div
-            v-for="product in lowStockProducts"
-            :key="product.id"
-            class="flex items-center justify-between p-3 bg-yellow-50 border border-yellow-100 rounded-lg"
-          >
+          <div v-for="product in lowStockProducts" :key="product.id"
+            class="flex items-center justify-between p-3 bg-yellow-50 border border-yellow-100 rounded-lg">
             <div class="flex items-center">
-              <div class="flex-shrink-0 h-10 w-10 rounded-md bg-yellow-100 flex items-center justify-center text-yellow-600">
+              <div
+                class="flex-shrink-0 h-10 w-10 rounded-md bg-yellow-100 flex items-center justify-center text-yellow-600">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
               </div>
               <div class="ml-4">
@@ -125,10 +97,8 @@
                 </p>
               </div>
             </div>
-            <router-link
-              :to="`/products/${product.id}/edit`"
-              class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-yellow-700 bg-yellow-100 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-            >
+            <router-link :to="`/products/${product.id}/edit`"
+              class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded-md text-yellow-700 bg-yellow-100 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
               Update Stock
             </router-link>
           </div>
