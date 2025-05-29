@@ -1,5 +1,5 @@
 // API Configuration
-export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+export const API_URL = 'http://localhost:5000/api';
 
 // App Configuration
 export const APP_NAME = 'StockSmart';
@@ -24,7 +24,7 @@ export const ROLES = {
 export const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'RWF',
   }).format(amount);
 };
 

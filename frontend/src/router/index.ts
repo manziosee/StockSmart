@@ -7,14 +7,14 @@ import DashboardView from '../views/dashboard/DashboardView.vue'
 import ProductsView from '../views/products/ProductsView.vue'
 import ProductCreateView from '../views/products/ProductCreateView.vue'
 import ProductEditView from '../views/products/ProductEditView.vue'
-// import SalesView from '../views/sales/SalesView.vue'
-// import SaleCreateView from '../views/sales/SaleCreateView.vue'
-// import SaleDetailView from '../views/sales/SaleDetailView.vue'
-// import ReportsView from '../views/reports/ReportsView.vue'
-// import UsersView from '../views/users/UsersView.vue'
+import SalesView from '../views/sales/SalesView.vue'
+import SaleCreateView from '../views/sales/SaleCreateView.vue'
+import SaleDetailView from '../views/sales/SaleDetailView.vue'
+import ReportsView from '../views/reports/ReportsView.vue'
+import UsersView from '../views/users/UsersView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory('/'), // Removed import.meta.env.BASE_URL
   routes: [
     {
       path: '/',
@@ -58,36 +58,36 @@ const router = createRouter({
       component: ProductEditView,
       meta: { requiresAuth: true, roles: ['owner', 'admin'] }
     },
-    // {
-    //   path: '/sales',
-    //   name: 'sales',
-    //   component: SalesView,
-    //   meta: { requiresAuth: true }
-    // },
-    // {
-    //   path: '/sales/create',
-    //   name: 'sale-create',
-    //   component: SaleCreateView,
-    //   meta: { requiresAuth: true }
-    // },
-    // {
-    //   path: '/sales/:id',
-    //   name: 'sale-detail',
-    //   component: SaleDetailView,
-    //   meta: { requiresAuth: true }
-    // },
-    // {
-    //   path: '/reports',
-    //   name: 'reports',
-    //   component: ReportsView,
-    //   meta: { requiresAuth: true, roles: ['owner', 'admin'] }
-    // },
-    // {
-    //   path: '/users',
-    //   name: 'users',
-    //   component: UsersView,
-    //   meta: { requiresAuth: true, roles: ['owner', 'admin'] }
-    // }
+    {
+      path: '/sales',
+      name: 'sales',
+      component: SalesView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/sales/create',
+      name: 'sale-create',
+      component: SaleCreateView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/sales/:id',
+      name: 'sale-detail',
+      component: SaleDetailView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/reports',
+      name: 'reports',
+      component: ReportsView,
+      meta: { requiresAuth: true, roles: ['owner', 'admin'] }
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: UsersView,
+      meta: { requiresAuth: true, roles: ['owner', 'admin'] }
+    }
   ]
 })
 
