@@ -110,11 +110,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useAuthStore } from '@/stores/auth'
-import { formatCurrency } from '@/config'
-import AppLayout from '@/components/layout/AppLayout.vue'
-import StatCard from '@/components/dashboard/StatCard.vue'
-import SalesChart from '@/components/dashboard/SalesChart.vue'
+import { useAuthStore } from '../../stores/auth'
+import { formatCurrency } from '../../config'
+import AppLayout from '../../components/layout/AppLayout.vue'
+import StatCard from '../../components/dashboard/StatCard.vue'
+import SalesChart from '../../components/dashboard/SalesChart.vue'
 
 const authStore = useAuthStore()
 const selectedPeriod = ref('7D')
