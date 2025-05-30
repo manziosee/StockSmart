@@ -70,10 +70,11 @@ const chartOptions = {
       backgroundColor: 'rgba(15, 82, 186, 0.9)',
       titleFont: {
         size: 14,
-        weight: 'bold'
+        style: 'bold'
       },
       bodyFont: {
-        size: 13
+        size: 13,
+        style: 'normal'
       },
       padding: 10,
       displayColors: false,
