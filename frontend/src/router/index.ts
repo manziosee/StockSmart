@@ -1,108 +1,100 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import { useAuthStore } from '../stores/auth'
-import LandingPage from '../views/LandingPage.vue'
-import LoginView from '../views/auth/LoginView.vue'
-import RegisterView from '../views/auth/RegisterView.vue'
-import DashboardView from '../views/dashboard/DashboardView.vue'
-import ProductsView from '../views/products/ProductsView.vue'
-import ProductCreateView from '../views/products/ProductCreateView.vue'
-import ProductEditView from '../views/products/ProductEditView.vue'
-import SalesView from '../views/sales/SalesView.vue'
-import SaleCreateView from '../views/sales/SaleCreateView.vue'
-import SaleDetailView from '../views/sales/SaleDetailView.vue'
-import ReportsView from '../views/reports/ReportsView.vue'
-import UsersView from '../views/users/UsersView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import { useAuthStore } from '../stores/auth';
 
 const router = createRouter({
-  history: createWebHistory('/'), // Removed import.meta.env.BASE_URL
+  history: createWebHistory('/'),
   routes: [
     {
       path: '/',
       name: 'landing',
-      component: LandingPage,
+      component: () => import('../views/LandingPage.vue'),
       meta: { requiresAuth: false }
-    },
-    {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: DashboardView,
-      meta: { requiresAuth: true }
     },
     {
       path: '/login',
       name: 'login',
-      component: LoginView,
+      component: () => import('../views/auth/LoginView.vue'),
       meta: { requiresAuth: false }
     },
     {
       path: '/register',
       name: 'register',
-      component: RegisterView,
+      component: () => import('../views/auth/RegisterView.vue'),
       meta: { requiresAuth: false }
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('../views/dashboard/DashboardView.vue'),
+      meta: { requiresAuth: true }
     },
     {
       path: '/products',
       name: 'products',
-      component: ProductsView,
+      component: () => import('../views/products/ProductsView.vue'),
       meta: { requiresAuth: true }
     },
     {
       path: '/products/create',
       name: 'product-create',
-      component: ProductCreateView,
+      component: () => import('../views/products/ProductCreateView.vue'),
       meta: { requiresAuth: true, roles: ['owner', 'admin'] }
     },
     {
       path: '/products/:id/edit',
       name: 'product-edit',
-      component: ProductEditView,
+      component: () => import('../views/products/ProductEditView.vue'),
       meta: { requiresAuth: true, roles: ['owner', 'admin'] }
     },
     {
       path: '/sales',
       name: 'sales',
-      component: SalesView,
+      component: () => import('../views/sales/SalesView.vue'),
       meta: { requiresAuth: true }
     },
     {
       path: '/sales/create',
       name: 'sale-create',
-      component: SaleCreateView,
+      component: () => import('../views/sales/SaleCreateView.vue'),
       meta: { requiresAuth: true }
     },
     {
       path: '/sales/:id',
       name: 'sale-detail',
-      component: SaleDetailView,
+      component: () => import('../views/sales/SaleDetailView.vue'),
       meta: { requiresAuth: true }
     },
     {
       path: '/reports',
       name: 'reports',
-      component: ReportsView,
+      component: () => import('../views/reports/ReportsView.vue'),
       meta: { requiresAuth: true, roles: ['owner', 'admin'] }
     },
     {
       path: '/users',
       name: 'users',
-      component: UsersView,
+      component: () => import('../views/users/UsersView.vue'),
       meta: { requiresAuth: true, roles: ['owner', 'admin'] }
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/dashboard'
     }
   ]
-})
+});
 
 router.beforeEach((to, from, next) => {
-  const authStore = useAuthStore()
-  const requiresAuth = to.meta.requiresAuth
-  const requiredRoles = to.meta.roles as string[] | undefined
+  const authStore = useAuthStore();
+  const requiresAuth = to.meta.requiresAuth;
+  const requiredRoles = to.meta.roles as string[] | undefined;
 
   if (requiresAuth && !authStore.isAuthenticated) {
-    next({ name: 'login', query: { redirect: to.fullPath } })
+    next({ name: 'login', query: { redirect: to.fullPath } });
   } else if (requiredRoles && !requiredRoles.includes(authStore.userRole)) {
-    next({ name: 'dashboard' })
+    next({ name: 'dashboard' });
   } else {
-    next()
+    next();
   }
-})
+});
 
-export default router
+export default router;
